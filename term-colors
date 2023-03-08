@@ -1,6 +1,6 @@
 #! /bin/bash
 
-function show_colors () {
+function show_216_8bit_colors () {
   for fg in {16..255} ; do # Foreground
       for bg in {16..255} ; do # Background
           # Display the color
@@ -14,4 +14,4 @@ function show_colors () {
   done
 }
 
-show_colors | less -r
+show_216_8bit_colors | less -r
