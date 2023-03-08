@@ -1,0 +1,11 @@
+for fg in {16..255} ; do # Foreground
+	for bg in {16..255} ; do # Background
+		# Display the color
+		printf "\e[48;5;%s;38;5;%sm  %3s  %3s  \e[0m" $bg $fg $bg $fg
+		# Display 6 colors per lines
+		if [ $((($bg + 1) % 6)) == 4 ] ; then
+			echo # New line
+		fi
+	done
+	echo # New line
+done
