@@ -1,6 +1,6 @@
 #! /bin/bash
 
-function show-colors () {
+function show_colors () {
   for fg in {16..255} ; do # Foreground
       for bg in {16..255} ; do # Background
           # Display the color
@@ -14,4 +14,4 @@ function show-colors () {
   done
 }
 
-show-colors | less -r
+show_colors | less -r
