@@ -28,20 +28,22 @@ function show_216_8bit_colors () {
 # 16 + (36 × r) + (6 × g) + b
 
 function cycle_216_8bit_colors_rgb () {
+  local callback x y z
+
   callback=$1
 
   for x in {0..5} ; do # color cube x-coord color
-    printf "%s x: %s\\n" $callback $x
+#    printf "%s x: %s\\n" $callback $x
     for y in {0..5} ; do # color cube y-coord color
-      printf "    %s y: %s\\n" $callback $y
+#      printf "    %s y: %s\\n" $callback $y
       for z in {0..5} ; do # color cube z-coord color
-        printf "        %s z: %s\\n" $callback $z
-        #printf "cycle_216_8bit_colors_rgb: %s %s %s %s\\n" $callback $x $y $z
+#        printf "        %s z: %s\\n" $callback $z
+#        printf "cycle_216_8bit_colors_rgb: %s %s %s %s\\n" $callback $x $y $z
         eval "$callback $x $y $z"
       done
     done
   done
-  #printf "cycle_216_8bit_colors_rgb: %s %s %s %s\\n" $callback $x $y $z
+#  printf "cycle_216_8bit_colors_rgb: %s %s %s %s\\n" $callback $x $y $z
 }
 
 function calculate_color_number {
@@ -53,7 +55,7 @@ function calculate_color_number {
 function show_bg_color_with_fg_color () {
   fg_x=$1; fg_y=$2; fg_z=$3;
   bg_x=$4; bg_y=$5; bg_z=$6;
-  #printf "show_bg_color_with_fg_color %s %s %s %s %s %s\\n" $fg_x $fg_y $fg_z $bg_x $bg_y $bg_z
+#  printf "show_bg_color_with_fg_color %s %s %s %s %s %s\\n" $fg_x $fg_y $fg_z $bg_x $bg_y $bg_z
 
   local color_number=nothing
   calculate_color_number fg_x fg_y fg_z
@@ -70,7 +72,7 @@ function show_bg_color_with_fg_color () {
 
 function show_bg_color_for_each_fg_color () {
   fg_x=$1; fg_y=$2; fg_z=$3;
-  #printf "show_bg_color_for_each_fg_color %s %s %s\\n" $fg_x $fg_y $fg_z
+#  printf "show_bg_color_for_each_fg_color %s %s %s\\n" $fg_x $fg_y $fg_z
 
   cycle_216_8bit_colors_rgb "show_bg_color_with_fg_color $fg_x $fg_y $fg_z"
 }
