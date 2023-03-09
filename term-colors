@@ -27,17 +27,21 @@ function show_216_8bit_colors () {
 # Algorithm for turning R, G, B into ANSI color number:
 # 16 + (36 × r) + (6 × g) + b
 
-
 function cycle_216_8bit_colors_rgb () {
   callback=$1
 
   for x in {0..5} ; do # color cube x-coord color
+    printf "%s x: %s\\n" $callback $x
     for y in {0..5} ; do # color cube y-coord color
+      printf "    %s y: %s\\n" $callback $y
       for z in {0..5} ; do # color cube z-coord color
+        printf "        %s z: %s\\n" $callback $z
+        #printf "cycle_216_8bit_colors_rgb: %s %s %s %s\\n" $callback $x $y $z
         eval "$callback $x $y $z"
       done
     done
   done
+  #printf "cycle_216_8bit_colors_rgb: %s %s %s %s\\n" $callback $x $y $z
 }
 
 function calculate_color_number {
@@ -49,6 +53,7 @@ function calculate_color_number {
 function show_bg_color_with_fg_color () {
   fg_x=$1; fg_y=$2; fg_z=$3;
   bg_x=$4; bg_y=$5; bg_z=$6;
+  #printf "show_bg_color_with_fg_color %s %s %s %s %s %s\\n" $fg_x $fg_y $fg_z $bg_x $bg_y $bg_z
 
   local color_number=nothing
   calculate_color_number fg_x fg_y fg_z
@@ -57,14 +62,16 @@ function show_bg_color_with_fg_color () {
   bg_color=$color_number
 
   # Display the bg and fg color
-  printf "\e[48;5;%s;38;5;%sm  %3s  %3s  \e[0m" $bg_color $fg_color $bg_color $fg_color
+  #printf "\e[48;5;%s;38;5;%sm  %3s  %3s  \e[0m" $bg_color $fg_color $bg_color $fg_color
 
   # Output a newline every 6th change to stay within the same color cube slice
-  if [ $((($bg_color + 1) % 6)) = 4 ] ; then printf '\n'; fi
+  #if [ $((($bg_color + 1) % 6)) = 4 ] ; then printf '\n'; fi
 }
 
 function show_bg_color_for_each_fg_color () {
   fg_x=$1; fg_y=$2; fg_z=$3;
+  #printf "show_bg_color_for_each_fg_color %s %s %s\\n" $fg_x $fg_y $fg_z
+
   cycle_216_8bit_colors_rgb "show_bg_color_with_fg_color $fg_x $fg_y $fg_z"
 }
 
